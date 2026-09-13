@@ -29,6 +29,11 @@ class AnalyzeRequest(BaseModel):
     remaining_matches: list[dict[str, Any]] = []
 
 
+@app.get("/")
+def root():
+    return {"service": "IPL Qualification Analyzer", "health": "/api/health", "docs": "/docs"}
+
+
 @app.get("/api/health")
 def health():
     return {"status": "ok"}
