@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: ipl-qualification-api
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+
+  - type: web
+    name: ipl-qualification-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://ipl-qualification-api.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
